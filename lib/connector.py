@@ -17,7 +17,7 @@ class Database:
 		default_data = {
 			"user": {
 				"id": "User#" + user_id,
-				"name": random.choice(["Sang Mitologi Jawa", "Pangeran Hitam Tanah Pasundan", "The Darkness of Child Molester", "Laskar Kegelapan", "Kesatria Berkuda", "Majestic of Child Predator"]),
+				"name": random.choice(["Sang Mitologi Jawa", "Pangeran Hitam Tanah Pasundan", "Kesatria Putih Berkuda"]),
 				"theme": "Dark Default",
 				"token": 0
 			}

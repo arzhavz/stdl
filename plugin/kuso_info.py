@@ -10,15 +10,15 @@ from prompt_toolkit.shortcuts import (
 )
 
 from lib.connector import Database
+from lib.loading import LoadingTask
 from lib.messages import Messages
 from lib.theme import Themes
 from lib.utils import KeyListCreator, Validation
 
 from lib.scraper.kusonime import Kusonime, KusonimeSearch
-from lib.loading import LoadingTask
 
 	
-class KusonimeGUI:
+class App:
 	def __init__(self):
 		self.db = Database()
 		self.theme = Themes.loads(self.db.read(self.db.id)["user"]["theme"])
@@ -125,7 +125,7 @@ class KusonimeGUI:
 					else:
 						host_data = reso_data[selected_host]
 						os.system(f"start {host_data}")
-						exit()
+						return
 
 	def _search(self):
 		result = input_dialog(
@@ -198,4 +198,4 @@ class KusonimeGUI:
 				text=HTML(f"Sayonara <ansiyellow>{username}</ansiyellow>!"),
 				style=self.theme,
 			).run()
-			exit()
+			return

@@ -10,15 +10,15 @@ from prompt_toolkit.shortcuts import (
 )
 
 from lib.connector import Database
+from lib.loading import LoadingTask
 from lib.messages import Messages
 from lib.theme import Themes
 from lib.utils import KeyListCreator, Validation
 
 from lib.scraper.otakudesu import OtakudesuInfo, OtakudesuSearch
-from lib.loading import LoadingTask
 
 
-class OtakudesuGUI:
+class App:
 	def __init__(self):
 		self.db = Database()
 		self.theme = Themes.loads(self.db.read(self.db.id)["user"]["theme"])
@@ -76,7 +76,7 @@ class OtakudesuGUI:
 			anim = LoadingTask(Messages.title, link, OtakudesuInfo)
 			result = button_dialog(
 				title=Messages.title,
-				text=anim['info']['title'],
+				text="Judul dipilih: " + anim['info']['title'],
 				style=self.theme,
 				buttons=[
 					("Detail", "detail"),
@@ -120,6 +120,53 @@ class OtakudesuGUI:
 				).run()
 				if action == "cancel":
 					self._download()
+				elif action == "batch":
+					reso = radiolist_dialog(
+						title=Messages.title,
+						text=(
+							"Silahkan pilih resolusi di bawah."
+						),
+						style=self.theme,
+						values=[
+							("sd_360p", "360P SD {}".format(anim["batch"]['download']['sd_360p'][0]['size'])),
+							("sd_480p", "480P SD {}".format(anim["batch"]['download']['sd_480p'][0]['size'])),
+							("hd_720p", "720P HD {}".format(anim["batch"]['download']['hd_720p'][0]['size']))
+						],
+					).run()
+					if reso == None:
+						message_dialog(
+							title=Messages.title,
+							text=HTML(
+								f"Operasi dibatalkan oleh user."
+							),
+							style=self.theme,
+						).run()
+						self._download()
+					else:
+						res_tup = []
+						ress = anim["batch"]['download'][reso]
+						for res in ress:
+							res_tup.append((res["url"], res["name"]))
+						selected_res = radiolist_dialog(
+							title=Messages.title,
+							text=(
+								"Silahkan pilih episode di bawah."
+							),
+							style=self.theme,
+							values=res_tup[::-1],
+						).run()
+						if selected_res == None:
+							message_dialog(
+								title=Messages.title,
+								text=HTML(
+									f"Operasi dibatalkan oleh user."
+								),
+								style=self.theme,
+							).run()
+							self._download()
+						else:
+							os.system(f"start {selected_res}")
+							return
 				elif action == "episode":
 					eps = anim["episode"]
 					tup_eps = []
@@ -128,7 +175,7 @@ class OtakudesuGUI:
 					episodenya = radiolist_dialog(
 						title=Messages.title,
 						text=(
-								"Silahkan pilih episode di bawah."
+							"Silahkan pilih episode di bawah."
 						),
 						style=self.theme,
 						values=tup_eps,
@@ -188,15 +235,8 @@ class OtakudesuGUI:
 								).run()
 								self._download()
 							else:
-								message_dialog(
-									title=Messages.title,
-									text=HTML(
-										f"Membuka tautan <ansigreen>{selected_host}</ansigreen> pada browser."
-									),
-									style=self.theme,
-								).run()
 								os.system(f"start {selected_host}")
-								exit()
+								return
 
 	def _search(self):
 		result = input_dialog(
@@ -269,4 +309,4 @@ class OtakudesuGUI:
 				text=HTML(f"Sayonara <ansiyellow>{username}</ansiyellow>!"),
 				style=self.theme,
 			).run()
-			exit()
+			return

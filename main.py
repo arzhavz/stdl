@@ -13,12 +13,11 @@ from prompt_toolkit.shortcuts import (
 from typing_extensions import Annotated
 
 from lib.connector import Database
+from lib.loading import LoadingMonitor
 from lib.messages import Messages
 from lib.theme import Themes
-from lib.loading import LoadingMonitor
 
-from plugin.kuso_gui import KusonimeGUI
-from plugin.otds_gui import OtakudesuGUI
+from plugin import Anime
 
 
 class Applications:
@@ -33,16 +32,15 @@ class Applications:
 			style=self.theme,
 			values=[
 				("kusonime", "Kusonime"),
-				("otakudesu", "Otakudesu"),
-				#("samehadaku", "Samehadaku")
+				("otakudesu", "Otakudesu")
 			]
 		).run()
 		if result == None:
 			Applications().run_program()
 		if result == "kusonime":
-			KusonimeGUI().run_program()
+			Anime.Kusonime().run_program()
 		elif result == "otakudesu":
-			OtakudesuGUI().run_program()
+			Anime.Otakudesu().run_program()
 	def _settings(self):
 		result = button_dialog(
 			title=Messages.title,
@@ -147,8 +145,7 @@ class Applications:
 		except Exception as e:
 			message_dialog(
 				title=Messages.title,
-				text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>"),
-				#text=HTML(f"Operasi dibatalkan oleh user."),
+				text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>\nKlik tombol <ansiyellow>OK</ansiyellow> di bawah untuk keluar."),
 				style=self.theme
 			).run()
 
@@ -164,7 +161,6 @@ def CLI(
 	Untuk dukungan, tambahkan flag --support.
 	Untuk memulai program dengan tambahan halaman intro, tambahkan flag --intro.
 	
-	Versi: Zeta 0.0.1-alpha
 	"""
 	if support:
 		from time import sleep
@@ -180,10 +176,9 @@ def CLI(
 			screen.update(Panel(text))
 			sleep(3)
 		os.system("start https://facebook.com/sndyarz")
-		exit()
+		return
 		
 	Applications().run_program(loading = intro)
 	
 	
-if __name__ == "__main__":
-	typer.run(CLI)
+typer.run(CLI)
