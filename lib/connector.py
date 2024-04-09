@@ -1,7 +1,6 @@
 import sqlite3
 import json
 import random
-import string
 
 
 class Database:
@@ -17,7 +16,7 @@ class Database:
 		default_data = {
 			"user": {
 				"id": "User#" + user_id,
-				"name": random.choice(["Sang Mitologi Jawa", "Pangeran Hitam Tanah Pasundan", "Kesatria Putih Berkuda"]),
+				"name": random.choice(["Sang Mitologi Jawa", "Pangeran Hitam Tanah Pasundan", "Laskar Kegelapan", "Kesatria Berkuda"]),
 				"theme": "Dark Default",
 				"token": 0
 			}

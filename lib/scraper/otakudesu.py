@@ -4,7 +4,11 @@ from bs4 import BeautifulSoup as bs
 
 from lib.utils import Validation
 
-def OtakudesuInfo(url):
+def Otakudesu(url):
+	"""
+	Title: Otakudesu scraper
+	Author: Sandy Pratama
+	"""
 	try:
 
 		def rep(text, d):

@@ -124,8 +124,7 @@ class App:
 						self._download(link)
 					else:
 						host_data = reso_data[selected_host]
-						os.system(f"start {host_data}")
-						return
+						return os.system(f"start {host_data}")
 
 	def _search(self):
 		result = input_dialog(
@@ -193,9 +192,8 @@ class App:
 		elif result == "download":
 			self._download()
 		else:
-			message_dialog(
+			return message_dialog(
 				title=Messages.title,
 				text=HTML(f"Sayonara <ansiyellow>{username}</ansiyellow>!"),
 				style=self.theme,
 			).run()
-			return

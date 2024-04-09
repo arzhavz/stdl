@@ -1,4 +1,3 @@
-import re
 from prompt_toolkit.styles import Style
 
 

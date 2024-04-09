@@ -4,6 +4,10 @@ from urllib.parse import quote, unquote
 
 
 class Kusonime:
+	""" 
+	Title: Kusonime scraper
+	Author: Sandy Pratama
+	"""
 	def __init__(self, url: str = "https://kusonime.com/bocchi-the-rock-batch-subtitle-indonesia/") -> None:
 		self.url = url
 		self.info = self.get_info

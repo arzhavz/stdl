@@ -1,5 +1,4 @@
 import os
-import re
 import typer
 
 from prompt_toolkit import HTML
@@ -32,7 +31,8 @@ class Applications:
 			style=self.theme,
 			values=[
 				("kusonime", "Kusonime"),
-				("otakudesu", "Otakudesu")
+				("otakudesu", "Otakudesu"),
+				("samehada", "Samehadaku")
 			]
 		).run()
 		if result == None:
@@ -41,6 +41,9 @@ class Applications:
 			Anime.Kusonime().run_program()
 		elif result == "otakudesu":
 			Anime.Otakudesu().run_program()
+		elif result == "samehada":
+			Anime.Samehadaku().run_program()
+
 	def _settings(self):
 		result = button_dialog(
 			title=Messages.title,
@@ -107,9 +110,8 @@ class Applications:
 				self.db.update(uid, {"theme": new_theme})
 				Applications()._settings()
 				
-		
 	def run_program(self, loading: bool = False):
-		try:
+		#try:
 			uid = self.db.id
 			data = self.db.read(uid)
 			username = data["user"]["name"]
@@ -142,12 +144,13 @@ class Applications:
 					text=HTML(f"Sayonara <ansiyellow>{username}</ansiyellow>!"),
 					style=self.theme
 				).run()
-		except Exception as e:
-			message_dialog(
-				title=Messages.title,
-				text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>\nKlik tombol <ansiyellow>OK</ansiyellow> di bawah untuk keluar."),
-				style=self.theme
-			).run()
+			return True
+		#except Exception as e:
+		#	message_dialog(
+		#		title=Messages.title,
+		#		text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>\nKlik tombol <ansiyellow>OK</ansiyellow> di bawah untuk keluar."),
+		#		style=self.theme
+		#	).run()
 
 
 def CLI(
@@ -181,4 +184,5 @@ def CLI(
 	Applications().run_program(loading = intro)
 	
 	
-typer.run(CLI)
+#typer.run(CLI)
+Applications().run_program()

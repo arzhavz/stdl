@@ -1,16 +1,16 @@
 <div>
-	<h1>STDL - Scraping Tools and Downloader</h1>
+	<h1>STDL - Search Tools and Downloader</h1>
 </div>
 <div>
-<h2>Instalation</h2>
-<p>If you're using Windows, forget about instalation, just download the compiled version at release menu.</p>
-<p>However, you can try using this hard way:</p>
+	<h2>Installation</h2>
+	<p>If you're using Windows, forget about installation, just download the compiled version from the release menu.</p>
+	<p>However, you can try the following hard way:</p>
 
 ```sh
 git clone https://github.com/arzhavz/stdl && cd stdl && python -m pip install -r requirements.txt -U
 ```
 
-<p>Then, run program using this folowing command:</p>
+<p>Then, run the program using the following command:</p>
 
 ```sh
 python main.py
@@ -35,14 +35,27 @@ python main.py --help
 		</thead>
 		<tbody>
 			<tr>
+				<td>09/04/2024</td>
+				<td><code>1.0.3</code></td>
+				<td>
+					<ul>
+						<li>Update version <code>Firefly::STDL</code></li>
+						<li>Add support for Samehadaku, including anime, batch, and episodes</li>
+						<li>Remove unused GUI</li>
+						<li>Some boring bug fixing and some changes, again</li>
+						<li>If you're seeing a message about "there's an error" or something, don't worry, that's a feature. That's a MAJOR feature-ya know!</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
 				<td>31/03/2024</td>
 				<td><code>1.0.2</code></td>
 				<td>
 					<ul>
 						<li>Update version <code>Firefly::STDL</code></li>
-						<li>Why changed into Firefly? She's mine, pure cuteness</li>
+						<li>Why did I choose Firefly? Idk, she's just... so cute, sweet, caring, understanding, and innocent. Ugh, her smile just makes me melt. Damn, I've never liked someone this hard before.</li>
 						<li>Add batch support for Otakudesu</li>
-						<li>Some boring bugfixing and some changes</li>
+						<li>Some boring bug fixing and some changes</li>
 						<li>If you're seeing a message about "there's an error" or something, don't worry, that's a feature</li>
 					</ul>
 				</td>
@@ -53,13 +66,13 @@ python main.py --help
 				<td>
 					<ul>
 						<li>Final version <code>Zeta::STDL</code></li>
-						<li>Why Zeta? She's my oshi</li>
-						<li>Some shit update that nobody cares</li>
+						<li>TL;DR, Zeta is my oshi</li>
+						<li>Some update that nobody cares about</li>
 					</ul>
 				</td>
 			</tr>
 			<tr>
-				<td>I forgor</td>
+				<td>10/03/2024</td>
 				<td><code>1.0.1-alpha</code></td>
 				<td>
 					<ul>
@@ -73,7 +86,6 @@ python main.py --help
 <div>
 	<h2>Donation</h2>
 	<ul>
-		<li>Saweria: https://saweria.co/arzhavz</li>
-		<li>Litecoin: <code>ltc1q3te4akune9sz7mxg9r4fymm32u0hy0drs7h3cl</code></li>
+		<li>Saweria: <a href="https://saweria.co/arzhavz">https://saweria.co/arzhavz</a></li>
 	</ul>
 </div>

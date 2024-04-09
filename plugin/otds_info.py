@@ -13,9 +13,9 @@ from lib.connector import Database
 from lib.loading import LoadingTask
 from lib.messages import Messages
 from lib.theme import Themes
-from lib.utils import KeyListCreator, Validation
+from lib.utils import Validation
 
-from lib.scraper.otakudesu import OtakudesuInfo, OtakudesuSearch
+from lib.scraper.otakudesu import Otakudesu, OtakudesuSearch
 
 
 class App:
@@ -73,7 +73,7 @@ class App:
 			).run()
 			self._download()
 		else:
-			anim = LoadingTask(Messages.title, link, OtakudesuInfo)
+			anim = LoadingTask(Messages.title, link, Otakudesu)
 			result = button_dialog(
 				title=Messages.title,
 				text="Judul dipilih: " + anim['info']['title'],
@@ -165,8 +165,7 @@ class App:
 							).run()
 							self._download()
 						else:
-							os.system(f"start {selected_res}")
-							return
+							return os.system(f"start {selected_res}")
 				elif action == "episode":
 					eps = anim["episode"]
 					tup_eps = []
@@ -235,8 +234,7 @@ class App:
 								).run()
 								self._download()
 							else:
-								os.system(f"start {selected_host}")
-								return
+								return os.system(f"start {selected_host}")
 
 	def _search(self):
 		result = input_dialog(
@@ -304,9 +302,8 @@ class App:
 		elif result == "download":
 			self._download()
 		else:
-			message_dialog(
+			return message_dialog(
 				title=Messages.title,
 				text=HTML(f"Sayonara <ansiyellow>{username}</ansiyellow>!"),
 				style=self.theme,
 			).run()
-			return

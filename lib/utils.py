@@ -1,7 +1,3 @@
-import re
-import os 
-
-    
 class KeyListCreator:
 	def __init__(self, data):
 		self.data = data

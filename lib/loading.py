@@ -1,4 +1,3 @@
-import random
 from datetime import datetime
 from time import sleep
 
@@ -11,7 +10,6 @@ from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
 from rich.syntax import Syntax
 from rich.table import Table
 from rich.live import Live
-from rich.markdown import Markdown
 
 console = Console()
     
@@ -143,7 +141,7 @@ class Transformer(nn.Module):
             grid.add_column(justify="center", ratio=1)
             grid.add_column(justify="right")
             grid.add_row(
-                "[b]STDL - Scraping Tools and Downloader[/b]",
+                "[b]STDL - Search Tools and Downloader[/b]",
                 datetime.now().ctime().replace(":", "[blink]:[/]"),
             )
             return Panel(grid, style="white on magenta")
@@ -163,8 +161,7 @@ class Transformer(nn.Module):
 
     
 def LoadingTask(ver, task_input, task):
-    #console.print(Markdown(f"# {ver}"), style="bold cyan")
-    with console.status(f"[bold yellow]Loading, please wait a minute [blink]...[/]", spinner=random.choice(["aesthetic", "shark", 'pong', 'material'])) as status:
+    with console.status(f"[bold magenta]{ver} [bold yellow]is working, please wait a minute [blink]...[/blink]", spinner="aesthetic") as status:
         while True:
             data = task(task_input)
             return data
