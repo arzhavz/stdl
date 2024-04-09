@@ -111,7 +111,7 @@ class Applications:
 				Applications()._settings()
 				
 	def run_program(self, loading: bool = False):
-		#try:
+		try:
 			uid = self.db.id
 			data = self.db.read(uid)
 			username = data["user"]["name"]
@@ -145,12 +145,12 @@ class Applications:
 					style=self.theme
 				).run()
 			return True
-		#except Exception as e:
-		#	message_dialog(
-		#		title=Messages.title,
-		#		text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>\nKlik tombol <ansiyellow>OK</ansiyellow> di bawah untuk keluar."),
-		#		style=self.theme
-		#	).run()
+		except Exception as e:
+			message_dialog(
+				title=Messages.title,
+				text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>\nKlik tombol <ansiyellow>OK</ansiyellow> di bawah untuk keluar."),
+				style=self.theme
+			).run()
 
 
 def CLI(
@@ -184,5 +184,4 @@ def CLI(
 	Applications().run_program(loading = intro)
 	
 	
-#typer.run(CLI)
-Applications().run_program()
+typer.run(CLI)
