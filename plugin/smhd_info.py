@@ -24,12 +24,13 @@ class App:
 		self.theme = Themes.loads(self.db.read(self.db.id)["user"]["theme"])
 
 	def _download(self, link: str = "nothing"):
-		if link == "nothing":
-			link = input_dialog(
-				title=Messages.title,
-				text=HTML("Mohon masukkan link anime dari Samehadaku.\nExample: <ansimagenta>https://samehadaku.email/anime/sousou-no-frieren/</ansimagenta>"),
-				style=self.theme,
-			).run()
+		try:
+			if link == "nothing":
+				link = input_dialog(
+					title=Messages.title,
+					text=HTML("Mohon masukkan link anime dari Samehadaku.\nExample: <ansimagenta>https://samehadaku.email/anime/sousou-no-frieren/</ansimagenta>"),
+					style=self.theme,
+				).run()
 			
 			smhd_regex = re.compile(
 				r'^https?://'
@@ -234,6 +235,12 @@ class App:
 						return True
 					else:
 						self._download(link)
+		except Exception as e:
+			message_dialog(
+				title=Messages.title,
+				text=HTML(f"Terjadi kesalahan: <ansired>{e}</ansired>\nKlik tombol <ansiyellow>OK</ansiyellow> di bawah untuk keluar."),
+				style=self.theme
+			).run()
 
 	def _search(self):
 		result = input_dialog(
@@ -275,10 +282,10 @@ class App:
 				values=data,
 			).run()
 
-			if url == None:
-				self._search()
-			else:
-				self._download(link=url)
+			if url is None:
+				return self._search()
+				
+			self._download(link=url)
 
 	def _single_download(self):
 		link = input_dialog(
