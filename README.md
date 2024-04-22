@@ -35,6 +35,17 @@ python main.py --help
 		</thead>
 		<tbody>
 			<tr>
+				<td>22/04/2024</td>
+				<td><code>1.0.4</code></td>
+				<td>
+					<ul>
+						<li>Update version <code>Firefly::STDL</code></li>
+						<li>Add support for manga downloader</li>
+						<li>That's it.</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
 				<td>09/04/2024</td>
 				<td><code>1.0.3</code></td>
 				<td>

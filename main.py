@@ -16,7 +16,7 @@ from lib.loading import LoadingMonitor
 from lib.messages import Messages
 from lib.theme import Themes
 
-from plugin import Anime
+from plugin import Anime, Manga
 
 
 class Applications:
@@ -24,6 +24,9 @@ class Applications:
 		self.db = Database()
 		self.theme = Themes.loads(self.db.read(self.db.id)["user"]["theme"])
 	
+	def _manga_info(self):
+		Manga.Komiku().run_program()
+
 	def _anime_info(self):
 		result = radiolist_dialog(
 			title=Messages.title,
@@ -123,6 +126,7 @@ class Applications:
 				style=self.theme,
 				values=[
 					("animedl", "Anime Info"),
+					("mangadl", "Manga Info"),
 					("settings", "Settings"),
 					("donate", HTML(f"<ansimagenta>Donate</ansimagenta>"))
 				]
@@ -131,6 +135,8 @@ class Applications:
 				Applications()._settings()
 			elif result == "animedl":
 				Applications()._anime_info()
+			elif result == "mangadl":
+				Applications()._manga_info()
 			elif result == "donate":
 				os.system("start https://saweria.co/arzhavz")
 				message_dialog(
@@ -159,7 +165,7 @@ def CLI(
 ):
 	"""
 	
-	STDL (Scraping Tools and Downloaders) adalah sebuah program yang dapat digunakan untuk mengunduh atau mendapatkan informasi dari website yang tersedia di STDL.
+	STDL (Search Tools and Downloader) adalah sebuah program yang dapat digunakan untuk mengunduh atau mendapatkan informasi dari website yang tersedia di STDL.
 	
 	Untuk dukungan, tambahkan flag --support.
 	Untuk memulai program dengan tambahan halaman intro, tambahkan flag --intro.
